@@ -1,0 +1,41 @@
+# Environment files
+.env
+
+# Build outputs
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+artifacts/
+TestResults/
+
+# IDE and editor files
+.vs/
+.idea/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.rsuser
+*.code-workspace
+
+# NuGet and logs
+*.nupkg
+*.snupkg
+*.nuget.props
+*.nuget.targets
+*.log
+*.binlog
+
+# Coverage and test artifacts
+coverage*.json
+coverage*.xml
+coverage*.info
+*.coverage
+*.coveragexml
+BenchmarkDotNet.Artifacts/
+
+# OS files
+.DS_Store
+Thumbs.db

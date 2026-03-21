@@ -1,0 +1,2 @@
+class BaseProcessManager:
+    pass

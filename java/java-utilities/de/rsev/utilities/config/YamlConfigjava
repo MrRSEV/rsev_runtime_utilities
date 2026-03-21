@@ -1,0 +1,47 @@
+package de.rsev.utilities.config;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * <summary>
+ * YAML-basierte Konfigurationsimplementierung.
+ * Dient als einfache, menschenlesbare Konfigurationsquelle
+ * für strukturierte Einstellungen.
+ * </summary>
+ */
+public class YamlConfig extends BaseConfig {
+
+    protected final Map<String, Object> values = new HashMap<>();
+
+    public YamlConfig(String path) {
+        super(path);
+    }
+
+    /* -----------------------------
+       Load / Save Methods
+       ----------------------------- */
+
+    /**
+     * <summary>
+     * Lädt die YAML-Konfiguration aus der Datei.
+     * </summary>
+     */
+    @Override
+    public void load() {
+        // TODO: YAML-Parsing implementieren
+        loaded = true;
+    }
+
+    /**
+     * <summary>
+     * Speichert die Konfiguration als YAML-Datei.
+     * </summary>
+     */
+    @Override
+    public void save(String path) {
+        // TODO: YAML-Serialisierung implementieren
+    }
+
+    /* -----------------------------
+       Access Meth

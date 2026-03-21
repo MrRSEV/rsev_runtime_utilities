@@ -1,0 +1,61 @@
+package de.rsev.utilities.config;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * <summary>
+ * XML-basierte Konfigurationsimplementierung.
+ * Geeignet für strukturierte, schema-nahe
+ * Konfigurationsdateien.
+ * </summary>
+ */
+public class XmlConfig extends BaseConfig {
+
+    protected final Map<String, Object> values = new HashMap<>();
+
+    public XmlConfig(String path) {
+        super(path);
+    }
+
+    /* -----------------------------
+       Load / Save Methods
+       ----------------------------- */
+
+    /**
+     * <summary>
+     * Lädt die XML-Konfiguration aus der Datei.
+     * </summary>
+     */
+    @Override
+    public void load() {
+        // TODO: XML-Parsing implementieren
+        loaded = true;
+    }
+
+    /**
+     * <summary>
+     * Speichert die Konfiguration als XML-Datei.
+     * </summary>
+     */
+    @Override
+    public void save(String path) {
+        // TODO: XML-Serialisierung implementieren
+    }
+
+    /* -----------------------------
+       Access Methods
+       ----------------------------- */
+
+    /**
+     * <summary>
+     * Liest einen Wert aus der XML-Konfiguration.
+     * </summary>
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> T get(String key, Class<T> type) {
+        Object value = values.get(key);
+        return type.isInstance(value) ? (T) value : null;
+    }
+}
