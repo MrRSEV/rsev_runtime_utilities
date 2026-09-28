@@ -13,6 +13,7 @@ Es kombiniert Klarheit, Erweiterbarkeit und architektonische Reinheit – mit dem 
 - AssemblyLoader für dynamisches Laden von Plugins
 - TypeDiscovery für automatische Typ-Erkennung
 - PluginRegistry für Aktivierung/Deaktivierung von Plugins
+- MessageBusRegistry für Registrierung und Konstruktion benutzerdefinierter Message Buses
 - GlobalState für systemweite Zustände
 - Integrierter Logger (`ILogger`)
 
@@ -38,6 +39,12 @@ Es kombiniert Klarheit, Erweiterbarkeit und architektonische Reinheit – mit dem 
 - Dynamisches Laden externer Assemblies
 - Automatische Discovery von Controllern, Plugins und Services
 - Erweiterbar ohne Änderungen am Kernsystem
+
+### ?? Event- & Messaging-Templates
+- `IEventHandler<TEventArgs>` / `BaseEventHandler<TEventArgs>` für Ereignisverarbeitung
+- `IEventListener<TEventArgs>` / `BaseEventListener<TEventArgs>` für Ereignisempfang
+- `IMessageBus` / `BaseMessageBus` für benutzerdefinierte Message-Bus-Implementierungen
+- `MessageBusRegistry` zum Registrieren, Laden und Verwalten von Message Buses
 
 ---
 

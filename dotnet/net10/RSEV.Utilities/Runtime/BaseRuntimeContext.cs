@@ -1,6 +1,7 @@
 ﻿using RSEV.Utilities.Configuration;
 using RSEV.Utilities.Loading;
 using RSEV.Utilities.Logging;
+using RSEV.Utilities.Messaging;
 using RSEV.Utilities.Plugins;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,11 @@ namespace RSEV.Utilities.Runtime
         /// Das globale Plugin-Register, das Plugins lädt, aktiviert und deaktiviert.
         /// </summary>
         public virtual PluginRegistry PluginRegistry { get; protected set; }
+
+        /// <summary>
+        /// Das globale MessageBus-Register, das Message Buses lädt, registriert und verwaltet.
+        /// </summary>
+        public virtual MessageBusRegistry MessageBusRegistry { get; protected set; }
 
         /// <summary>
         /// Ein universeller Key-Value-Speicher für globale Zustände.
@@ -77,6 +83,7 @@ namespace RSEV.Utilities.Runtime
             AssemblyLoader = CreateAssemblyLoader();
             TypeDiscovery = CreateTypeDiscovery();
             PluginRegistry = CreatePluginRegistry();
+            MessageBusRegistry = CreateMessageBusRegistry();
             Logger = CreateLogger();
             GlobalState = new Dictionary<string, object>();
             IsRunning = false;
@@ -122,6 +129,16 @@ namespace RSEV.Utilities.Runtime
         protected virtual PluginRegistry CreatePluginRegistry()
         {
             return new PluginRegistry();
+        }
+
+        /// <summary>
+        /// Erstellt das Standard-MessageBusRegistry. Abgeleitete Klassen können
+        /// diese Methode überschreiben, um eigene Messaging-Systeme zu integrieren.
+        /// </summary>
+        /// <returns>Eine neue MessageBusRegistry-Instanz.</returns>
+        protected virtual MessageBusRegistry CreateMessageBusRegistry()
+        {
+            return new MessageBusRegistry();
         }
 
         /// <summary>

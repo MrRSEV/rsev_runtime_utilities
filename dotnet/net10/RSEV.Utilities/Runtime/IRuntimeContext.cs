@@ -1,6 +1,7 @@
 ﻿using RSEV.Utilities.Configuration;
 using RSEV.Utilities.Loading;
 using RSEV.Utilities.Logging;
+using RSEV.Utilities.Messaging;
 using RSEV.Utilities.Plugins;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,12 @@ namespace RSEV.Utilities.Runtime
         /// und neu laden kann.
         /// </summary>
         PluginRegistry PluginRegistry { get; }
+
+        /// <summary>
+        /// Das globale MessageBus-Register, das Message Buses lädt, registriert
+        /// und verwaltet.
+        /// </summary>
+        MessageBusRegistry MessageBusRegistry { get; }
 
         /// <summary>
         /// Ein universeller Key-Value-Speicher für globale Zustände, die von
