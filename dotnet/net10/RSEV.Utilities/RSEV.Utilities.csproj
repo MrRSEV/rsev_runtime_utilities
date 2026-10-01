@@ -1,24 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
     <TargetFramework>net8.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>RSEV.Utilities</PackageId>
-    <Version>0.1.0</Version>
+    <Version>2.0.0</Version>
     <Authors>Richard</Authors>
     <Company>RSEV</Company>
     <Description>Universal, extensible .NET utility framework.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/DEINNAME/RSEV.Utilities</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/DEINNAME/RSEV.Utilities</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/MrRSEV/rsev_runtime_utilities/tree/main/dotnet/net10/RSEV.Utilities</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MrRSEV/rsev_runtime_utilities/tree/main/dotnet/net10/RSEV.Utilities</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-
-
+    <PackageReadmeFile>README.md</PackageReadmeFile>
 
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\"/>
+    <None Include="CHANGELOG.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
 </Project>

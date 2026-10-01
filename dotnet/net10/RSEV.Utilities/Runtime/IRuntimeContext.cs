@@ -1,8 +1,10 @@
-﻿using RSEV.Utilities.Configuration;
+﻿using RSEV.Utilities.ApiBuilder;
+using RSEV.Utilities.Configuration;
 using RSEV.Utilities.Loading;
 using RSEV.Utilities.Logging;
 using RSEV.Utilities.Messaging;
 using RSEV.Utilities.Plugins;
+using RSEV.Utilities.Processes;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -51,6 +53,18 @@ namespace RSEV.Utilities.Runtime
         /// und verwaltet.
         /// </summary>
         MessageBusRegistry MessageBusRegistry { get; }
+
+        /// <summary>
+        /// Der globale Prozess-Controller, der Subprozesse verwaltet, startet,
+        /// stoppt und deren Zustand überwacht.
+        /// </summary>
+        RuntimeProcessController ProcessController { get; }
+
+        /// <summary>
+        /// Der globale API-Host, der Runtime-Endpoints verwaltet und über TCP
+        /// (optional mit TLS) bedient.
+        /// </summary>
+        RuntimeApiHost ApiHost { get; }
 
         /// <summary>
         /// Ein universeller Key-Value-Speicher für globale Zustände, die von

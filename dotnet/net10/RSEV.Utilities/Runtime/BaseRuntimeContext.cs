@@ -1,8 +1,10 @@
-﻿using RSEV.Utilities.Configuration;
+﻿using RSEV.Utilities.ApiBuilder;
+using RSEV.Utilities.Configuration;
 using RSEV.Utilities.Loading;
 using RSEV.Utilities.Logging;
 using RSEV.Utilities.Messaging;
 using RSEV.Utilities.Plugins;
+using RSEV.Utilities.Processes;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -42,6 +44,18 @@ namespace RSEV.Utilities.Runtime
         /// Das globale MessageBus-Register, das Message Buses lädt, registriert und verwaltet.
         /// </summary>
         public virtual MessageBusRegistry MessageBusRegistry { get; protected set; }
+
+        /// <summary>
+        /// Der globale Prozess-Controller, der Subprozesse verwaltet, startet, stoppt
+        /// und deren Zustand überwacht.
+        /// </summary>
+        public virtual RuntimeProcessController ProcessController { get; protected set; }
+
+        /// <summary>
+        /// Der globale API-Host, der Runtime-Endpoints verwaltet und über TCP
+        /// (optional mit TLS) bedient.
+        /// </summary>
+        public virtual RuntimeApiHost ApiHost { get; protected set; }
 
         /// <summary>
         /// Ein universeller Key-Value-Speicher für globale Zustände.
@@ -84,7 +98,9 @@ namespace RSEV.Utilities.Runtime
             TypeDiscovery = CreateTypeDiscovery();
             PluginRegistry = CreatePluginRegistry();
             MessageBusRegistry = CreateMessageBusRegistry();
+            ProcessController = CreateProcessController();
             Logger = CreateLogger();
+            ApiHost = CreateApiHost();
             GlobalState = new Dictionary<string, object>();
             IsRunning = false;
         }
@@ -139,6 +155,26 @@ namespace RSEV.Utilities.Runtime
         protected virtual MessageBusRegistry CreateMessageBusRegistry()
         {
             return new MessageBusRegistry();
+        }
+
+        /// <summary>
+        /// Erstellt den Standard-ProcessController. Abgeleitete Klassen können
+        /// diese Methode überschreiben, um eigene Prozess-Verwaltung zu integrieren.
+        /// </summary>
+        /// <returns>Eine neue RuntimeProcessController-Instanz.</returns>
+        protected virtual RuntimeProcessController CreateProcessController()
+        {
+            return new RuntimeProcessController(Logger as ILogger);
+        }
+
+        /// <summary>
+        /// Erstellt den Standard-ApiHost. Abgeleitete Klassen können diese Methode
+        /// überschreiben, um eigene API-Host-Konfigurationen (z. B. mit TLS) bereitzustellen.
+        /// </summary>
+        /// <returns>Eine neue RuntimeApiHost-Instanz.</returns>
+        protected virtual RuntimeApiHost CreateApiHost()
+        {
+            return new RuntimeApiHost(logger: Logger as ILogger);
         }
 
         /// <summary>
