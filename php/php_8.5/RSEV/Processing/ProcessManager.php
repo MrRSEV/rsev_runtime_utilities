@@ -38,4 +38,11 @@ class ProcessManager
         }
         $this->processes = [];
     }
+
+    public function isRunning(int $pid): bool
+    {
+        if (!isset($this->processes[$pid])) return false;
+        $status = proc_get_status($this->processes[$pid]);
+        return (bool) $status['running'];
+    }
 }

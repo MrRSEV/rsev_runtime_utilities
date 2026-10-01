@@ -19,4 +19,16 @@ class EventDispatcher
             $listener($payload);
         }
     }
+
+    public function forget(string $event, ?callable $listener = null): void
+    {
+        if ($listener === null) {
+            unset($this->listeners[$event]);
+            return;
+        }
+        $this->listeners[$event] = array_values(array_filter(
+            $this->listeners[$event] ?? [],
+            static fn ($registered) => $registered !== $listener,
+        ));
+    }
 }

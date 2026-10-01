@@ -3,7 +3,12 @@ plugins {
 }
 
 group = 'de.rsev.utilities'
-version = '1.0.0'
+version = '2.0.0'
+
+sourceSets {
+    main.java.srcDirs = ['.']
+    main.java.exclude('build/**', 'out/**', 'gradle/**')
+}
 
 repositories {
     mavenCentral()

@@ -1,5 +1,8 @@
 package de.rsev.utilities.runtime;
 
+import de.rsev.utilities.api.RuntimeApiHost;
+import de.rsev.utilities.runtime.processes.RuntimeProcessController;
+
 /**
  * <summary>
  * Definiert den Kontext der Runtime-Umgebung.
@@ -8,6 +11,10 @@ package de.rsev.utilities.runtime;
  * </summary>
  */
 public interface IRuntimeContext {
+
+    RuntimeProcessController getProcessController();
+
+    RuntimeApiHost getApiHost();
 
     /**
      * <summary>

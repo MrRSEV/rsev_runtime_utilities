@@ -1,6 +1,6 @@
 [project]
 name = "rsev_utilities"
-version = "1.0.0"
+version = "2.0.0"
 description = "A modular runtime utility framework for python"
 authors = [
     { name = "MrRSEV", email = "info@rsev.de" }

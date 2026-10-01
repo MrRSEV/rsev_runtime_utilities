@@ -6,6 +6,8 @@ PHP implementation of the RSEV Utilities framework.
 
 This package provides a native PHP 8.5 implementation of the RSEV utility architecture.
 
+Current release: **2.0.0**.
+
 It follows the same design principles as the other platform variants while remaining idiomatic to PHP.
 
 The framework is designed as a lightweight, include-based library without external dependencies.
@@ -19,6 +21,8 @@ The framework is designed as a lightweight, include-based library without extern
 * Plugin system
 * Runtime safety
 * Process management
+* Typed event registries and event bus
+* Runtime API host and client
 * First-run bootstrap support
 
 ## Installation
@@ -28,6 +32,9 @@ Include the PHP module entry point:
 ```php
 require 'path/to/php/php_8.5/RSEV/Init.php';
 ```
+
+For Composer-based projects, use the included `composer.json` and load
+`vendor/autoload.php`. The legacy `Init.php` entry point remains supported.
 
 ## Structure
 
@@ -42,6 +49,7 @@ php/
         ├── Controller/
         ├── Core/
         ├── Event/
+        ├── Api/
         ├── Http/
         ├── Logging/
         ├── Plugin/
@@ -88,6 +96,17 @@ They are loaded via `PluginLoader`.
 * Exit handling via `UnexpectedExitHandler`
 * Exit codes defined in `ExitCodes`
 * Cleanup of running processes through `ProcessManager`
+* Managed subprocesses through `RuntimeProcessController`
+* API endpoints through `RuntimeApiHost`
+* Process adapters for shell, Python, Node.js, .NET, and arbitrary executables
+
+`RuntimeApiHost` is dependency-free and can be serviced from an application loop
+with `tick()`. `RuntimeApiClient` uses the same HTTP/1.1-style request format.
+
+## Composer
+
+The package metadata is included in `composer.json` and exposes the `RSEV\\` PSR-4
+namespace. The package version is `2.0.0`.
 
 ## Status
 

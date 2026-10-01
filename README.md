@@ -2,6 +2,8 @@
 
 A unified utility framework for object-oriented platforms.
 
+Current release: **2.0.0**.
+
 ## Overview
 
 RSEV Utilities provides a structured, modular toolbox for system-level development
@@ -42,15 +44,30 @@ The implementations share the same conceptual building blocks where they fit the
 * Runtime support
 * Controllers and command handling
 * Eventing and dependency injection
+* Managed process lifecycles and health checks
+* Dependency-free runtime API hosts and clients
 
 ## Status
 
-| Platform | Status |
-| -------- | ------ |
-| Python | Active |
-| Java | Active |
-| .NET | Active |
-| PHP 8.5 | Active |
+| Platform | Version | Status |
+| -------- | ------- | ------ |
+| Python | 2.0.0 | Active |
+| Java | 2.0.0 | Active |
+| .NET | 2.0.0 | Active |
+| PHP 8.5 | 2.0.0 | Active |
+
+## Version 2.0.0
+
+All platform implementations now expose the common 2.0 building blocks where
+they fit the host language:
+
+* Typed event registries with handler/listener subscriptions
+* Runtime subprocess controllers with lifecycle and health checks
+* Process adapters for shell, Python, Node.js, .NET, and arbitrary executables
+* Lightweight runtime API hosts, endpoint controllers, request builders, and clients
+
+Platform-specific details are documented in each implementation's README and
+CHANGELOG file.
 
 ## Roadmap
 

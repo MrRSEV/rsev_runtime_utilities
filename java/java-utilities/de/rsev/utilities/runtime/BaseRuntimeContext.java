@@ -1,5 +1,8 @@
 package de.rsev.utilities.runtime;
 
+import de.rsev.utilities.api.RuntimeApiHost;
+import de.rsev.utilities.runtime.processes.RuntimeProcessController;
+
 /**
  * <summary>
  * Abstrakte Basisklasse für Runtime-Kontexte.
@@ -10,6 +13,8 @@ public abstract class BaseRuntimeContext implements IRuntimeContext {
 
     protected final String baseDirectory;
     protected boolean debug;
+    protected final RuntimeProcessController processController;
+    protected final RuntimeApiHost apiHost;
 
     /**
      * <summary>
@@ -18,6 +23,26 @@ public abstract class BaseRuntimeContext implements IRuntimeContext {
      */
     protected BaseRuntimeContext(String baseDirectory) {
         this.baseDirectory = baseDirectory;
+        this.processController = createProcessController();
+        this.apiHost = createApiHost();
+    }
+
+    protected RuntimeProcessController createProcessController() {
+        return new RuntimeProcessController();
+    }
+
+    protected RuntimeApiHost createApiHost() {
+        return new RuntimeApiHost();
+    }
+
+    @Override
+    public RuntimeProcessController getProcessController() {
+        return processController;
+    }
+
+    @Override
+    public RuntimeApiHost getApiHost() {
+        return apiHost;
     }
 
     /* -----------------------------

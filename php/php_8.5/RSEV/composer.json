@@ -1,0 +1,14 @@
+{
+  "name": "rsev/utilities",
+  "description": "RSEV Utilities PHP framework",
+  "version": "2.0.0",
+  "type": "library",
+  "require": {
+    "php": ">=8.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "RSEV\\": ""
+    }
+  }
+}

@@ -31,8 +31,16 @@ from .plugin.entry_point_loader import EntryPointPluginLoader
 from .plugin.hot_reload import HotReloadManager
 from .plugin.lifecycle_manager import LifecycleManager
 
-from .events.event import Event
-from .events.event_bus import EventBus
+from .events import (
+    BaseEventBus,
+    BaseEventHandler,
+    BaseEventListener,
+    Event,
+    EventBus,
+    EventHandler,
+    EventListener,
+    EventRegistry,
+)
 
 from .di.container import Container
 from .di.graph_container import GraphContainer
@@ -54,6 +62,32 @@ from .runtime.exit_code import ExitCode
 from .runtime.i_runtime_context import IRuntimeContext
 from .runtime.shutdown_summary import ShutdownSummary
 from .runtime.unexpected_exit_handler import UnexpectedExitHandler
+from .runtime.processing import (
+    DotNetProcess,
+    ExecutableProcess,
+    IRuntimeSubprocess,
+    NodeProcess,
+    ProcessLogLevel,
+    PythonProcess,
+    RuntimeProcessController,
+    RuntimeSubprocessBase,
+    ShellProcess,
+    SubprocessState,
+)
+
+from .api import (
+    BaseRuntimeEndpoint,
+    EndpointRequest,
+    EndpointResponse,
+    IRuntimeEndpoint,
+    RuntimeApiClient,
+    RuntimeApiHost,
+    RuntimeEndpointController,
+    RuntimeRequest,
+    RuntimeRequestBuilder,
+    RuntimeResponse,
+    RuntimeSession,
+)
 
 from .loading.assembly_loader import AssemblyLoader
 from .loading.type_discovery import TypeDiscovery
