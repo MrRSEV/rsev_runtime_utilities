@@ -1,56 +1,56 @@
 # RSEV.Utilities  
-Ein universelles, erweiterbares und zukunftssicheres .NET-Framework für Plugins, Controller, Module und Systemdienste.
+Ein universelles, erweiterbares und zukunftssicheres .NET-Framework fÃ¼r Plugins, Controller, Module und Systemdienste.
 
 RSEV.Utilities ist ein modular aufgebautes Utility-Framework, das Entwicklern sofort eine stabile Grundlage bietet, um komplexe Anwendungen, Services oder Plugin-Systeme zu erstellen.  
-Es kombiniert Klarheit, Erweiterbarkeit und architektonische Reinheit – mit dem Ziel, Barrieren zu entfernen und produktive Entwicklung zu ermöglichen.
+Es kombiniert Klarheit, Erweiterbarkeit und architektonische Reinheit â€“ mit dem Ziel, Barrieren zu entfernen und produktive Entwicklung zu ermÃ¶glichen.
 
 ---
 
-## ? Features
+## Features
 
-### ?? Universeller RuntimeContext
+### Universeller RuntimeContext
 - Globale Konfiguration (`IConfig`)
-- AssemblyLoader für dynamisches Laden von Plugins
-- TypeDiscovery für automatische Typ-Erkennung
-- PluginRegistry für Aktivierung/Deaktivierung von Plugins
-- MessageBusRegistry für Registrierung und Konstruktion benutzerdefinierter Message Buses
-- GlobalState für systemweite Zustände
+- AssemblyLoader fÃ¼r dynamisches Laden von Plugins
+- TypeDiscovery fÃ¼r automatische Typ-Erkennung
+- PluginRegistry fÃ¼r Aktivierung/Deaktivierung von Plugins
+- MessageBusRegistry fÃ¼r Registrierung und Konstruktion benutzerdefinierter Message Buses
+- GlobalState fÃ¼r systemweite ZustÃ¤nde
 - Integrierter Logger (`ILogger`)
 
-### ?? Lifecycle-System
+###  Lifecycle-System
 - `IOnStart` / `IOnStartAsync`
 - `IOnStop` / `IOnStopAsync`
-- `IFirstRun` für einmalige Initialisierungen
+- `IFirstRun` fÃ¼r einmalige Initialisierungen
 - Saubere Trennung von Start-, Stop- und Setup-Logik
 
-### ?? Logging-System
+### Logging-System
 - `SystemLog` als erweiterbarer Standard-Logger
 - Logrotation
 - Farbige Konsolenausgabe
 - LogLevel: Debug, Info, Warnung, Error, Kritisch
-- Austauschbar über `ILogger`
+- Austauschbar Ã¼ber `ILogger`
 
-### ??? Stabiler Shutdown & Fehlerbehandlung
-- `UnexpectedExitHandler` für kontrollierten Shutdown bei Fehlern
-- `ShutdownSummary` für Diagnose und Logging
+### Stabiler Shutdown & Fehlerbehandlung
+- `UnexpectedExitHandler` fÃ¼r kontrollierten Shutdown bei Fehlern
+- `ShutdownSummary` fÃ¼r Diagnose und Logging
 - Empfehlung zur Nutzung eigener `IOnStop`-Implementierungen
 
-### ?? Plugin- & Modularchitektur
+### Plugin- & Modularchitektur
 - Dynamisches Laden externer Assemblies
 - Automatische Discovery von Controllern, Plugins und Services
-- Erweiterbar ohne Änderungen am Kernsystem
+- Erweiterbar ohne Ã„nderungen am Kernsystem
 
-### ?? Event- & Messaging-Templates
-- `IEventHandler<TEventArgs>` / `BaseEventHandler<TEventArgs>` für Ereignisverarbeitung
-- `IEventListener<TEventArgs>` / `BaseEventListener<TEventArgs>` für Ereignisempfang
-- `IMessageBus` / `BaseMessageBus` für benutzerdefinierte Message-Bus-Implementierungen
+### Event- & Messaging-Templates
+- `IEventHandler<TEventArgs>` / `BaseEventHandler<TEventArgs>` fÃ¼r Ereignisverarbeitung
+- `IEventListener<TEventArgs>` / `BaseEventListener<TEventArgs>` fÃ¼r Ereignisempfang
+- `IMessageBus` / `BaseMessageBus` fÃ¼r benutzerdefinierte Message-Bus-Implementierungen
 - `MessageBusRegistry` zum Registrieren, Laden und Verwalten von Message Buses
 
 ---
 
-## ?? Installation
+## Installation
 
-Einfach das Projekt als NuGet-Paket einbinden (optional, sobald veröffentlicht):
+Einfach das Projekt als NuGet-Paket einbinden (optional, sobald verÃ¶ffentlicht):
 
 ```bash
 dotnet add package RSEV.Utilities
