@@ -20,4 +20,14 @@ class PluginLoader
             }
         }
     }
+
+    public function loadGenerator(array $classes, PluginRegistry $registry): void
+    {
+        foreach ($classes as $class) {
+            if (class_exists($class)) {
+                $plugin = new $class();
+                if ($plugin instanceof IGeneratorPlugin) $registry->register($plugin);
+            }
+        }
+    }
 }

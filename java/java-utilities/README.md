@@ -15,6 +15,12 @@ cross-platform and cross-language system-level development.
 - Typed event registries and event bus
 - Managed subprocesses with lifecycle and health checks
 - Dependency-free runtime API host and client
+- Database adapter contracts for MySQL, SQL Server, PostgreSQL and SQLite
+- Provider-neutral connection factory, pool and connection manager
+- HAMAC/HMAC-SHA256 and SHA-256 crypto providers with key management
+- JWT access tokens, refresh tokens and session manager contracts
+- API request/response models with retry and rate-limit policies
+- Versioned generator plugin contracts and plugin registry
 
 ## Build and install
 
@@ -23,6 +29,7 @@ cross-platform and cross-language system-level development.
 ```
 
 The project remains dependency-free and uses the Java standard library only.
+No Maven- or Gradle-runtime dependency is required by the framework.
 
 ## Design Goals
 - System-level clarity
@@ -66,3 +73,28 @@ processes.startAsync(process.getProcessId());
 
 For API endpoints, extend `BaseRuntimeEndpoint`, register it with
 `RuntimeApiHost`, and call `start()`.
+
+## Database, Crypto, API and Session
+
+The 2.0 modules are available under the following packages:
+
+* `de.rsev.utilities.database` — provider-neutral database adapters
+* `de.rsev.utilities.connection` — configuration, factory, pool and manager
+* `de.rsev.utilities.crypto` — HAMAC/HMAC-SHA256, SHA-256 and key management
+* `de.rsev.utilities.api` — clients, request/response models and policies
+* `de.rsev.utilities.session` — JWT, access/refresh tokens and sessions
+* `de.rsev.utilities.plugin` — versioned generator plugin contracts
+
+Example:
+
+```java
+ICryptoProvider crypto = new HamacProvider("a-long-secret-key".getBytes(StandardCharsets.UTF_8));
+byte[] signature = crypto.compute("payload".getBytes(StandardCharsets.UTF_8));
+boolean valid = crypto.verify("payload".getBytes(StandardCharsets.UTF_8), signature);
+```
+
+## Documentation
+
+* [Platform Wiki](Doku/README.txt)
+* [API-Referenz](Doku/API-Referenz.txt)
+* [Repository Changelog](../../CHANGELOG.md)

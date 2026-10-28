@@ -1,0 +1,51 @@
+{
+  "generator": {
+    "name": "RSEV.CodeGenerator",
+    "version": "1.0.0",
+    "type": "deterministic",
+    "description": "Manifest-basierter Codegenerator für C# und Java Framework-Projekte."
+  },
+  "architecture": {
+    "pipeline": [
+      "manifest-loader",
+      "validator",
+      "normalizer",
+      "domain-model-builder",
+      "template-resolver",
+      "code-generator",
+      "test-generator",
+      "documentation-generator",
+      "artifact-writer"
+    ],
+    "principles": [
+      "single-source-of-truth",
+      "deterministic-output",
+      "template-driven-generation",
+      "dependency-injection",
+      "plugin-extensibility"
+    ]
+  },
+  "manifest": {
+    "schemaVersion": "1.0",
+    "project": {"name": "MrRSEV", "targets": ["csharp", "java", "php", "python", "rust"]},
+    "modules": ["database", "connection-manager", "crypto", "api", "session"],
+    "database": {"providers": ["mysql", "mssql", "postgresql", "sqlite"]},
+    "crypto": {"algorithms": ["hamac", "sha256"]},
+    "authentication": {"accessToken": true, "refreshToken": true, "sessionManager": true, "jwt": true}
+  },
+  "implementationPlan": {
+    "phase1": {"name": "Core Generator Foundation", "priority": 1, "tasks": ["Manifest Loader implementieren", "JSON Schema Validator implementieren", "Domain Model definieren", "Generation Context erstellen", "Logging integrieren"], "deliverables": ["ProjectDefinition", "ModuleDefinition", "ComponentDefinition", "GenerationContext"]},
+    "phase2": {"name": "Template Engine", "priority": 2, "tasks": ["Template Resolver entwickeln", "Template Rendering implementieren", "Token-Interpolation entwickeln", "Datei-Generator erstellen"], "deliverables": ["ITemplateEngine", "TemplateResolver", "TemplateRenderer", "OutputWriter"]},
+    "phase3": {"name": "Database Module", "priority": 3, "generatedArtifacts": ["IDatabaseAdapter", "MySqlAdapter", "SqlServerAdapter", "PostgreSqlAdapter", "SqliteAdapter"]},
+    "phase4": {"name": "Connection Manager", "priority": 4, "generatedArtifacts": ["IConnectionManager", "ConnectionFactory", "ConnectionPool", "ConnectionConfiguration"]},
+    "phase5": {"name": "HAMAC Cryptography", "priority": 5, "generatedArtifacts": ["ICryptoProvider", "HamacProvider", "Sha256Provider"]},
+    "phase6": {"name": "API Tools", "priority": 6, "generatedArtifacts": ["IApiClient", "HttpApiClient", "ApiRequest", "ApiResponse", "RetryPolicy", "RateLimitPolicy"]},
+    "phase7": {"name": "Access Token & Session", "priority": 7, "generatedArtifacts": ["IAccessTokenProvider", "JwtTokenProvider", "ISessionManager", "SessionManager", "AccessToken", "RefreshToken", "SessionContext"]},
+    "phase8": {"name": "Test Generator", "priority": 8, "rules": {"classToTestRatio": "1:1", "coverageTargets": ["constructor", "happy-path", "error-handling", "edge-cases"]}},
+    "phase9": {"name": "Documentation Generator", "priority": 9, "tasks": ["README.md generieren", "ARCHITECTURE.md generieren", "ROADMAP.md generieren", "CHANGELOG.md generieren"]},
+    "phase10": {"name": "Plugin System", "priority": 10, "tasks": ["Plugin Loader entwickeln", "Plugin Discovery entwickeln", "Versionierung integrieren", "Plugin Registry erstellen"], "interface": {"name": "IGeneratorPlugin", "members": ["Name", "Generate(context)"]}}
+  },
+  "templates": {"csharp": ["class.tpl", "interface.tpl", "repository.tpl", "service.tpl", "controller.tpl", "model.tpl"], "java": ["class.tpl", "interface.tpl", "repository.tpl", "service.tpl", "controller.tpl", "model.tpl"]},
+  "projectStructure": {"src": {"Core": {}, "Database": {}, "Connection": {}, "Crypto": {}, "Api": {}, "Session": {}}, "tests": {}, "docs": {}, "templates": {}, "plugins": {}},
+  "roadmap": {"v1": ["Manifest Parser", "Template Engine", "Database Generator", "Connection Manager Generator"], "v1.5": ["Crypto Generator", "API Generator", "Session Generator"], "v2": ["Plugin Marketplace", "Visual Designer", "CLI Tool", "Web UI"], "v3": ["Optional AI-Assisted Generation", "Architecture Recommendations", "Automatic Refactoring Suggestions"]}
+}

@@ -85,6 +85,30 @@ It combines clarity, extensibility, and architectural purity — with the goal o
 - `TlsSettings` – client-facing TLS configuration model that maps onto the shared `TlsOptions`
 - Automatic 500-error recognition and JSON payload serialization via `System.Text.Json`
 
+### Database, Connection, Crypto and Session
+
+The 2.0 framework modules use only .NET system APIs:
+
+- `IDatabaseAdapter` with MySQL, SQL Server, PostgreSQL and SQLite provider
+  contracts
+- `ConnectionConfiguration`, `ConnectionFactory`, `ConnectionPool` and
+  `IConnectionManager`
+- `ICryptoProvider`, `HamacProvider`, `Sha256Provider` and `KeyManager`
+- `IAccessTokenProvider`, `JwtTokenProvider`, `ISessionManager`,
+  `SessionManager`, `AccessToken`, `RefreshToken` and `SessionContext`
+- `IApiClient`, `HttpApiClient`, `ApiRequest`, `ApiResponse`, `RetryPolicy` and
+  `RateLimitPolicy`
+- `IGeneratorPlugin`, `GeneratorPluginLoader` and
+  `GeneratorPluginRegistry` for versioned extensions
+
+Example:
+
+```csharp
+ICryptoProvider crypto = new HamacProvider("a-long-secret-key"u8.ToArray());
+byte[] signature = crypto.Compute("payload"u8.ToArray());
+bool valid = crypto.Verify("payload"u8.ToArray(), signature);
+```
+
 ---
 
 ## Installation
@@ -93,3 +117,12 @@ It combines clarity, extensibility, and architectural purity — with the goal o
 dotnet add package RSEV.Utilities
 
 ```
+
+The source tree itself does not require external NuGet packages for the
+manifest modules; it targets the built-in .NET APIs.
+
+## Documentation
+
+* [Platform Wiki](Doku/README.txt)
+* [API-Referenz](Doku/API-Referenz.txt)
+* [Repository Changelog](../../../CHANGELOG.md)

@@ -1,0 +1,96 @@
+====== Java API-Referenz ======
+
+Die Quelle liegt unter ../de/rsev/utilities. Alle folgenden Namen sind
+öffentliche Einstiegspunkte. Getter/Setter von Records sind als record-
+Accessor geschrieben.
+
+===== API und Runtime =====
+
+  * RuntimeApiHost: register(), start(), stop(), isRunning()
+  * RuntimeEndpointController: register(), resolve(), getAll()
+  * IRuntimeEndpoint: route(), handle()
+  * BaseRuntimeEndpoint: route(), handle(), onHandle()
+  * EndpointRequest: method(), route(), headers(), body(), payload()
+  * EndpointResponse: fromText(), fromJson(), toHttp()
+  * RuntimeRequestBuilder: withRoute(), withPayload(), withHeader(), bindSession(), build()
+  * RuntimeRequest: route(), body(), headers(), sessionId()
+  * RuntimeResponse: statusCode(), body(), headers(), errorMessage(), isError(), getBodyAsText()
+  * RuntimeSession: getSessionId(), isExpired(), renewAsync()
+  * RuntimeApiClient: setSession(), callAsync(), sendAsync()
+  * IApiClient: sendAsync()
+  * ApiRequest: method(), uri(), headers(), body(), toHttpRequest()
+  * ApiResponse: statusCode(), headers(), body(), isSuccess()
+  * HttpApiClient: sendAsync()
+  * RetryPolicy: maxAttempts(), delay(), defaults()
+  * RateLimitPolicy: tryAcquire()
+
+===== Database und Connection =====
+
+  * IDatabaseAdapter: provider(), createConnection()
+  * MySqlAdapter, SqlServerAdapter, PostgreSqlAdapter, SqliteAdapter: provider(), createConnection()
+  * ConnectionConfiguration: provider(), url(), username(), password(), minimumPoolSize(), maximumPoolSize()
+  * ConnectionFactory: create()
+  * ConnectionPool: rent(), giveBack(), clear(), close()
+  * IConnectionManager: open(), giveBack(), close()
+  * ConnectionManager: open(), giveBack(), close()
+
+===== Crypto und Session =====
+
+  * ICryptoProvider: algorithm(), compute(), verify()
+  * HamacProvider, Sha256Provider: algorithm(), compute(), verify()
+  * KeyManager: generate()
+  * AccessToken: value(), expiresAt(), isExpired()
+  * RefreshToken: value(), expiresAt(), isExpired()
+  * SessionContext: subject(), accessToken(), refreshToken()
+  * IAccessTokenProvider: create(), validate()
+  * JwtTokenProvider: create(), validate()
+  * ISessionManager: create(), isValid()
+  * SessionManager: create(), isValid()
+
+===== Config, Logging, Communication =====
+
+  * IConfig: load(), save(), get(), set()
+  * BaseConfig: gemeinsame Konfigurationsablage
+  * JsonConfig, YamlConfig, XmlConfig, ConfConfig: Format-spezifisches Laden/Speichern
+  * ILogger: debug(), info(), warn(), error(), critical()
+  * BaseLogger: init(), close(), log(), debug(), info(), warn(), error(), critical()
+  * LoggerAdapter: Logger-Weiterleitung
+  * MailOptions: SMTP-/Mail-Accessor
+  * SystemMail: send()
+  * ISmtpClient: connect(), authenticate(), send(), close()
+  * BaseSmtpClient, RawSmtpClient: SMTP-Lifecycle
+  * SmtpConnection: open(), send(), receive(), close()
+  * SmtpProtocol: SMTP-Kommandos und Antwortcodes
+  * SmtpAuthHandler: LOGIN/PLAIN-Authentifizierung
+  * StartTlsHandler: STARTTLS-Upgrade
+  * SmtpResponse: Status- und Body-Daten
+
+===== Events, Commands, Controller =====
+
+  * Event: Eventdaten und Metadaten
+  * EventRegistry: register(), subscribeHandler(), subscribeListener(), unsubscribeHandler(), unsubscribeListener(), publish(), publishAsync(), handlerCount(), listenerCount()
+  * EventBus/BaseEventBus: Registry-Verwaltung und Publish
+  * IEvent, IEventHandler, IEventListener, IEventRegistry, IEventBus: Erweiterungsverträge
+  * ICommand, BaseCommand, CommandHandler, PluginReload: Command-Lifecycle
+  * IController, BaseController: Controller-Vertrag und Basisklasse
+
+===== Runtime, Prozesse und Plugins =====
+
+  * IRuntimeContext/BaseRuntimeContext: getBaseDirectory(), isDebug(), getProcessController(), getApiHost()
+  * RuntimeProcessController: register(), registerRange(), exists(), get(), getAll(), findByName(), findByState(), unregister(), startAsync(), stopAsync(), startByNameAsync(), stopByNameAsync(), startAllAsync(), stopAllAsync(), checkAllHealthAsync()
+  * IRuntimeSubprocess: getProcessId(), getName(), getExecutable(), getArguments(), getState(), getExitCode(), getProperties(), startAsync(), stopAsync(), restartAsync(), checkHealthAsync()
+  * RuntimeSubprocessBase: gemeinsamer Lifecycle
+  * ShellProcess, PythonProcess, NodeProcess, DotNetProcess, ExecutableProcess: konkrete Prozesse
+  * ExecutableResolver: resolve()
+  * SubprocessState, ProcessLogLevel: Prozesszustände und Log-Level
+  * IProcessManager/BaseProcessManager: Prozess-Management
+  * IPlugin/BasePlugin: isEnabled(), setEnabled(), onLoad(), onReload(), onUnload()
+  * IGeneratorPlugin: name(), version(), generate()
+  * PluginRegistry: register(), all(), generate()
+  * GeneratorPluginLoader: discover()
+
+===== Quellen und Format =====
+
+Die Java-Dateien liegen unter ../de/rsev/utilities. Dieses Wiki ist eine
+lesbare API-Landkarte; konkrete generische Typen und Exceptions sind direkt in
+den Java-Signaturen verbindlich dokumentiert.

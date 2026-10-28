@@ -1,0 +1,11 @@
+[package]
+name = "rsev-utilities"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Universal, extensible runtime utilities for Rust"
+
+[lib]
+name = "rsev_utilities"
+path = "src/lib.rs"
+

@@ -1,0 +1,102 @@
+====== Rust API-Referenz ======
+
+Quellbasis: ../src. Rust verwendet Traits statt Interfaces; die Namen mit
+führendem I entsprechen den Manifest-Verträgen.
+
+===== Configuration / Runtime =====
+
+  * Config: load(), save(), get(), set()
+  * BaseConfig: get_value<T>()
+  * ConfConfig, JsonConfig, YamlConfig: Config-Implementierungen
+  * RuntimeContext: config(), logger(), api_host(), plugin_registry(), message_bus_registry(), process_controller(), set(), get(), is_running(), set_running()
+  * BaseRuntimeContext: Default und RuntimeContext-Implementierung
+  * ShutdownSummary: new(), add_success(), add_error(), complete()
+  * OnStart, OnStop, FirstRun: Lifecycle-Traits
+
+===== Logging =====
+
+  * Logger: log(), debug(), info(), warn(), error(), critical()
+  * LogLevel: Debug, Info, Warn, Error, Critical
+  * SystemLog: new(), init(), close(), log()
+
+===== Database / Connection =====
+
+  * ConnectionConfiguration: new(), validate()
+  * DatabaseConnection: provider, connection_string, Display
+  * DatabaseAdapter/IDatabaseAdapter: provider(), create_connection()
+  * MySqlAdapter, SqlServerAdapter, PostgreSqlAdapter, SqliteAdapter: Adapter-Implementierungen
+  * ConnectionFactory: new(), create()
+  * ConnectionPool: new(), rent(), give_back(), clear()
+  * IConnectionManager: open(), give_back()
+  * ConnectionManager: new(), open(), give_back()
+
+===== Crypto / Session =====
+
+  * CryptoProvider/ICryptoProvider: algorithm(), compute(), verify()
+  * HamacProvider: new(), compute(), verify()
+  * Sha256Provider: compute(), verify()
+  * KeyManager: generate()
+  * sha256(), hmac_sha256_public(), constant_time_equal_public()
+  * AccessToken, RefreshToken: is_expired()
+  * SessionContext: subject, access_token, refresh_token
+  * IAccessTokenProvider: create(), validate()
+  * JwtTokenProvider: new(), create(), validate()
+  * ISessionManager: create(), is_valid()
+  * SessionManager: new(), create(), is_valid()
+
+===== API / Networking =====
+
+  * ApiRequest: method, route, headers, body
+  * ApiResponse: status_code, headers, body, is_success()
+  * IApiClient: send()
+  * RetryPolicy: max_attempts, delay, Default
+  * RateLimitPolicy: new(), try_acquire()
+  * HttpApiClient: new(), with_policies(), send()
+  * EndpointRequest: method, route, headers, body
+  * EndpointResponse: from_text()
+  * RuntimeEndpoint: route(), handle()
+  * BaseRuntimeEndpoint: new(), route(), handle()
+  * RuntimeEndpointController: register(), resolve()
+  * RuntimeApiHost: new(), register(), is_running(), stop(), start()
+  * RuntimeRequest: to_bytes()
+  * RuntimeRequestBuilder: new(), with_route(), with_method(), with_payload(), with_header(), build(), build_bytes()
+  * RuntimeResponse: is_error()
+  * RuntimeApiClient: new(), send()
+  * TlsOptions: none(), for_server(), for_client()
+  * TlsStreamFactory: unsupported()
+  * TcpConnection: send(), receive(), close()
+  * TcpTransport: connect()
+
+===== Events / Messaging / Commands / Controllers =====
+
+  * EventHandler, EventListener: handle()/listen()
+  * EventRegistry: new(), subscribe_handler(), subscribe_listener(), unsubscribe_handler(), unsubscribe_listener(), handler_count(), listener_count(), publish()
+  * EventBus/BaseEventBus: new(), register/publish Lifecycle
+  * MessageBus/BaseMessageBus: new(), initialize(), shutdown()
+  * MessageBusRegistry: register(), get(), exists(), all(), initialize_all(), shutdown_all()
+  * Command/CommandHandler: Command-Ausführung
+  * Controller/BaseController: Controller-Vertrag und Name
+
+===== Processes / Loading =====
+
+  * SubprocessState, ProcessLogLevel: Prozesszustände und Log-Level
+  * RuntimeSubprocess: process_id(), name(), executable(), arguments(), state(), exit_code(), properties(), start(), stop(), restart(), check_health()
+  * CommandProcess: new(), RuntimeSubprocess-Implementierung
+  * ShellProcess, PythonProcess, NodeProcess, DotNetProcess: new()
+  * RuntimeProcessController: register(), start(), stop(), list()
+  * ExecutableResolver: resolve()
+  * AssemblyLoader: load_directory()
+  * TypeDiscovery: files_with_extension()
+
+===== Plugins =====
+
+  * Plugin: name(), enable(), disable()
+  * PluginRegistry: register(), all(), enable_all(), disable_all()
+  * IGeneratorPlugin: name(), version(), generate()
+  * GeneratorPluginRegistry: register(), all(), generate()
+
+===== Quellpflege =====
+
+Bei jeder neuen `pub`-Funktion müssen README.txt und API-Referenz.txt
+aktualisiert werden. Die Rust-Signatur inklusive Lifetime- und Trait-Bounds
+bleibt die verbindliche Referenz.

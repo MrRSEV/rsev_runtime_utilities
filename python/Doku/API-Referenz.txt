@@ -1,0 +1,114 @@
+====== Python API-Referenz ======
+
+Die Quelle liegt unter ../rsev_utilities. Diese Datei listet die öffentlichen
+Module und Einstiegsmethoden nach Namespace.
+
+===== Core / Configuration / Logging =====
+
+  * core.string_utils.StringUtils: String-Transformationen
+  * core.date_utils.DateUtils: Datums-/Zeit-Hilfen
+  * core.file_utils.FileUtils: Dateioperationen
+  * core.system_utils.SystemUtils: System-/Umgebungsoperationen
+  * configuration.IConfig: load(), save(), get(), set()
+  * configuration.BaseConfig: gemeinsame Werteablage
+  * configuration.JsonConfig, YamlConfig, XmlConfig, ConfConfig: Format-Load/Save
+  * configuration.AutoReloadConfig: automatisches Neuladen
+  * logging.BaseLogger: get()
+  * logging.AdvancedLogger: create()
+
+===== Database / Connection =====
+
+  * database.configuration.ConnectionConfiguration: Validierung und Konfigurationsfelder
+  * database.adapters.IDatabaseAdapter: create_connection()
+  * database.adapters.MySqlAdapter, SqlServerAdapter, PostgreSqlAdapter, SqliteAdapter: create_connection()
+  * connection.factory.ConnectionFactory: create()
+  * connection.pool.ConnectionPool: rent(), give_back(), clear()
+  * connection.manager.IConnectionManager: open(), give_back()
+  * connection.manager.ConnectionManager: open(), give_back(), close()
+
+===== Crypto / Session =====
+
+  * crypto.providers.ICryptoProvider: compute(), verify()
+  * crypto.providers.HamacProvider: compute(), verify(), algorithm
+  * crypto.providers.Sha256Provider: compute(), verify(), algorithm
+  * crypto.keys.KeyManager: generate()
+  * session.models.AccessToken, RefreshToken: is_expired
+  * session.models.SessionContext: subject, access_token, refresh_token
+  * session.provider.IAccessTokenProvider: create(), validate()
+  * session.provider.JwtTokenProvider: create(), validate()
+  * session.manager.ISessionManager: create(), is_valid()
+  * session.manager.SessionManager: create(), is_valid()
+
+===== API =====
+
+  * api.tools.IApiClient: send()
+  * api.tools.ApiRequest: method, url, headers, body
+  * api.tools.ApiResponse: status_code, headers, body, is_success
+  * api.tools.RetryPolicy: max_attempts, delay_seconds
+  * api.tools.RateLimitPolicy: try_acquire()
+  * api.tools.HttpApiClient: send()
+  * api.client.RuntimeRequest: route, payload, headers, session_id
+  * api.client.RuntimeRequestBuilder: with_route(), with_payload(), with_header(), bind_session(), build(), build_bytes()
+  * api.client.RuntimeResponse: is_error, get_body_as_text()
+  * api.client.RuntimeSession: is_expired, renew_async()
+  * api.client.RuntimeApiClient: set_session(), call(), send()
+  * api.models.EndpointRequest: payload
+  * api.models.EndpointResponse: from_text(), from_json(), to_http()
+  * api.endpoints.IRuntimeEndpoint/BaseRuntimeEndpoint: route(), handle()
+  * api.endpoints.RuntimeEndpointController: register(), resolve()
+  * api.host.RuntimeApiHost: register(), start(), stop()
+
+===== Communication / SMTP =====
+
+  * communication.mail_options.MailOptions: Mailfelder
+  * communication.system_mail.SystemMail: send()
+  * communication.smtp.ISmtpClient: SMTP-Vertrag
+  * communication.smtp.BaseSmtpClient: gemeinsamer SMTP-Lifecycle
+  * communication.smtp.RawSmtpClient: native SMTP-Kommunikation
+  * communication.smtp.AsyncSmtpClient: asynchroner Versand
+  * communication.smtp.RetrySmtpClient: Versand mit Retry
+
+===== Events / Commands / Controller / DI =====
+
+  * events.Event: Eventdaten
+  * events.EventHandler/EventListener: handle()/listen()
+  * events.EventRegistry: subscribe_handler(), subscribe_listener(), unsubscribe_handler(), unsubscribe_listener(), publish(), publish_async(), handler_count(), listener_count()
+  * events.EventBus/BaseEventBus: Registry-/Bus-Operationen
+  * command.ICommand/BaseCommand/Command: Command-Verträge
+  * command.CommandHandler: Dispatch
+  * command.CommandRegistry: Register und Lookup
+  * command.CLIAdapter, DiscordAdapter, MinecraftAdapter: Eingangsadapter
+  * controller.IController/BaseController: Controller-Lifecycle
+  * di.Container: register(), resolve()
+  * di.GraphContainer: Graph-Auflösung
+  * di.inject: injiziert benannte Abhängigkeiten
+
+===== Runtime / Processes / Loading =====
+
+  * runtime.IRuntimeContext/BaseRuntimeContext: State, Config, Lifecycle
+  * runtime.ExitCode: Exitwerte
+  * runtime.ShutdownSummary: Erfolgs-/Fehlerzusammenfassung
+  * runtime.UnexpectedExitHandler: kontrolliertes Beenden
+  * runtime.processing.IRuntimeSubprocess: start(), stop(), restart(), check_health(), state
+  * runtime.processing.RuntimeSubprocessBase: Prozess-Basisklasse
+  * runtime.processing.ShellProcess, PythonProcess, NodeProcess, DotNetProcess, ExecutableProcess: Prozessadapter
+  * runtime.processing.RuntimeProcessController: register(), start(), stop(), list()
+  * loading.AssemblyLoader: Datei-/Modul-Laden
+  * loading.TypeDiscovery: Discovery-Funktionen
+
+===== Plugins / Versionierung =====
+
+  * plugin.i_plugin.IPlugin: Lifecycle-Vertrag
+  * plugin.base_plugin.BasePlugin: Standard-Lifecycle
+  * plugin.loader.PluginLoader: load_from_directory(), enable_all(), disable_all()
+  * plugin.entry_point_loader.EntryPointPluginLoader: Entry-Point-Discovery
+  * plugin.lifecycle_manager.LifecycleManager: Lifecycle-Orchestrierung
+  * plugin.hot_reload.HotReloadManager: Reload
+  * plugin.i_generator_plugin.IGeneratorPlugin: name, version, generate()
+  * plugin.registry.GeneratorPluginRegistry: register(), discover(), generate()
+
+===== Quellpflege =====
+
+Dieses Wiki dokumentiert öffentliche Einstiegspunkte. Bei neuen Klassen oder
+Funktionen müssen README.txt und API-Referenz.txt gemeinsam aktualisiert
+werden.

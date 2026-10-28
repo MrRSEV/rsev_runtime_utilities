@@ -1,0 +1,102 @@
+====== .NET API-Referenz ======
+
+Quellbasis: ../. Die Liste umfasst die öffentlichen Verträge und die in der
+Manifest-Implementierung hinzugefügten Module.
+
+===== Database / Connection =====
+
+  * IDatabaseAdapter: Provider, CreateConnection()
+  * MySqlAdapter, SqlServerAdapter, PostgreSqlAdapter, SqliteAdapter: Provider, CreateConnection()
+  * ConnectionConfiguration: ProviderInvariantName, ConnectionString, MinimumPoolSize, MaximumPoolSize, Validate()
+  * ConnectionFactory: Create()
+  * ConnectionPool: Rent(), Return(), Clear(), Dispose()
+  * IConnectionManager: Open(), Return(), Dispose()
+  * ConnectionManager: Open(), Return(), Dispose()
+
+===== Crypto / Session =====
+
+  * ICryptoProvider: Algorithm, Compute(), Verify()
+  * HamacProvider, Sha256Provider: Algorithm, Compute(), Verify()
+  * KeyManager: Generate()
+  * AccessToken: Value, ExpiresAt, IsExpired
+  * RefreshToken: Value, ExpiresAt, IsExpired
+  * SessionContext: Subject, AccessToken, RefreshToken
+  * IAccessTokenProvider: Create(), Validate()
+  * JwtTokenProvider: Create(), Validate()
+  * ISessionManager: Create(), IsValid()
+  * SessionManager: Create(), IsValid()
+
+===== API / Policies =====
+
+  * IApiClient: SendAsync()
+  * ApiRequest: Method, Uri, Headers, Body
+  * ApiResponse: StatusCode, Headers, Body, IsSuccess
+  * HttpApiClient: SendAsync()
+  * RetryPolicy: MaxAttempts, Delay, ExecuteAsync()
+  * RateLimitPolicy: RequestsPerWindow, Window, TryAcquire()
+
+===== ApiBuilder / RuntimeClient =====
+
+  * IRuntimeEndpoint: Route, OnHandleAsync()
+  * BaseRuntimeEndpoint: Route, HandleAsync(), OnHandleAsync()
+  * RuntimeEndpointController: Register(), Resolve()
+  * RuntimeApiHost: Register(), StartAsync(), StopAsync(), IsRunning
+  * EndpointRequest: Method, Route, Headers, Body, GetBodyAsText()
+  * EndpointResponse: FromText(), FromJson(), ToHttpBytes()
+  * RuntimeRequest: Route, Payload, Headers, SessionId
+  * RuntimeRequestBuilder: WithRoute(), WithPayload(), WithHeader(), BindSession(), Build(), BuildBytes()
+  * RuntimeResponse: StatusCode, Headers, Body, IsError, GetBodyAsText()
+  * RuntimeApiClient: SetSession(), CallAsync(), SendAsync()
+  * RuntimeSession: SessionId, IsExpired, RenewAsync()
+  * TcpTransport, TcpConnection: ConnectAsync(), SendAsync(), ReceiveAsync(), Close()
+  * TlsSettings: Client- und Server-TLS-Konfiguration
+
+===== Configuration / Logging =====
+
+  * IConfig: Load(), LoadAsync(), Save(), SaveAsync(), Get<T>()
+  * BaseConfig, JsonConfig, YamlConfig, ConfConfig: Konfigurationsablage
+  * ILogger: Log(), LogDebug(), LogInfo(), LogWarning(), LogError(), LogCritical()
+  * SystemLog: Init(), Log(), LogDebug(), LogInfo(), LogWarning(), LogError(), LogCritical(), Close()
+
+===== Events / Messaging / Commands =====
+
+  * IEvent, IEventHandler<T>, IEventListener<T>, IEventRegistry<T>, EventRegistry<T>
+  * EventRegistry<T>: SubscribeHandler(), SubscribeListener(), UnsubscribeHandler(), UnsubscribeListener(), Publish(), PublishAsync(), HandlerCount, ListenerCount
+  * IEventBus, BaseEventBus: Registry-Verwaltung und Publish
+  * IMessageBus, BaseMessageBus, MessageBusRegistry: Message-Bus-Verwaltung
+  * ICommand, BaseCommand, CommandHandler: Command-Ausführung
+  * IController, BaseController: Controller-Lifecycle
+
+===== Runtime / Prozesse =====
+
+  * IRuntimeContext, BaseRuntimeContext: Config, Logger, State, Plugins, API und Prozesse
+  * IOnStart, IOnStop, IFirstRun: Lifecycle-Verträge
+  * ShutdownSummary: Erfolgs-/Fehlerkomponenten und Complete()
+  * UnexpectedExitHandler: kontrollierte Fehlerbehandlung
+  * IRuntimeSubprocess: ProcessId, Name, Executable, Arguments, State, ExitCode, Properties, StartAsync(), StopAsync(), RestartAsync(), CheckHealthAsync()
+  * RuntimeSubprocessBase: gemeinsamer Lifecycle
+  * RuntimeProcessController: Register(), RegisterRange(), Exists(), Get(), GetAll(), FindByName(), FindByState(), Unregister(), StartAsync(), StopAsync(), StartByNameAsync(), StopByNameAsync(), StartAllAsync(), StopAllAsync(), CheckAllHealthAsync(), ListProcesses()
+  * DotNetProcess, NodeProcess, PythonProcess, ShellProcess, ExecutableProcess: Prozessadapter
+  * ExecutableResolver: Resolve()
+
+===== Plugins / Loading =====
+
+  * IPlugin: Name, Description, OnEnable(), OnEnableAsync(), OnDisable(), OnDisableAsync(), OnReload(), OnReloadAsync()
+  * PluginRegistry: LoadPlugins(), LoadPluginsAsync(), DisableAll(), EnableAll(), ForceReload(), ForceReloadAsync()
+  * IGeneratorPlugin: Name, Version, Generate()
+  * GeneratorContext: Values
+  * GeneratorPluginRegistry: Register(), All(), Generate()
+  * GeneratorPluginLoader: Discover()
+  * AssemblyLoader: LoadAssembly(), LoadAssembliesFromDirectory(), CreateInstance()
+  * TypeDiscovery: FindTypesImplementing(), FindTypesWithAttribute()
+
+===== Networking / Communication =====
+
+  * TlsOptions, TlsStreamFactory: TLS-Konfiguration und Stream-Erzeugung
+  * MailOptions, SystemMail: SMTP-Mailversand
+
+===== Quellpflege =====
+
+Bei einer öffentlichen Signaturänderung ist diese Referenz zusammen mit dem
+Quellcode zu aktualisieren. XML-Dokumentationskommentare im Quellcode sind die
+präziseste Referenz für Parameter- und Rückgabeverträge.

@@ -24,6 +24,12 @@ The framework is designed as a lightweight, include-based library without extern
 * Typed event registries and event bus
 * Runtime API host and client
 * First-run bootstrap support
+* Database adapters for MySQL, SQL Server, PostgreSQL and SQLite
+* Provider-neutral connection factory, pool and connection manager
+* HAMAC/HMAC-SHA256 and SHA-256 crypto providers
+* JWT access tokens, refresh tokens and session management
+* API request/response models with retry and rate-limit policies
+* Versioned generator plugin contracts and plugin registry
 
 ## Installation
 
@@ -33,8 +39,10 @@ Include the PHP module entry point:
 require 'path/to/php/php_8.5/RSEV/Init.php';
 ```
 
-For Composer-based projects, use the included `composer.json` and load
-`vendor/autoload.php`. The legacy `Init.php` entry point remains supported.
+Composer is not required at runtime. The included `composer.json` is optional
+metadata for projects that want Composer autoloading; the framework modules
+themselves do not require third-party packages. The `Init.php` entry point
+remains the dependency-free bootstrap.
 
 ## Structure
 
@@ -50,12 +58,16 @@ php/
         ├── Core/
         ├── Event/
         ├── Api/
+        ├── Connection/
+        ├── Crypto/
+        ├── Database/
         ├── Http/
         ├── Logging/
         ├── Plugin/
         ├── Processing/
         ├── Routing/
         ├── Runtime/
+        ├── Session/
         ├── Stream/
         ├── Utils/
         └── Init.php
@@ -91,6 +103,34 @@ RSEV\Plugin\PluginInterface
 
 They are loaded via `PluginLoader`.
 
+Generator extensions implement `RSEV\Plugin\IGeneratorPlugin` and expose a
+name, version and `generate()` operation. `PluginRegistry` handles registration
+and execution without introducing a package manager dependency.
+
+## Database, Crypto, API and Session
+
+The 2.0 modules follow the common manifest contract:
+
+* `IDatabaseAdapter` with MySQL, SQL Server, PostgreSQL and SQLite adapters
+* `ConnectionConfiguration`, `ConnectionFactory`, `ConnectionPool` and
+  `ConnectionManager`
+* `HamacProvider`, `Sha256Provider` and `KeyManager`
+* `IApiClient`, `HttpApiClient`, `ApiRequest`, `ApiResponse`, `RetryPolicy` and
+  `RateLimitPolicy`
+* `IAccessTokenProvider`, `JwtTokenProvider`, `ISessionManager`,
+  `SessionManager`, `AccessToken`, `RefreshToken` and `SessionContext`
+
+Example:
+
+```php
+$crypto = new RSEV\Crypto\HamacProvider('a-long-secret-key');
+$signature = $crypto->compute('payload');
+$valid = $crypto->verify('payload', $signature);
+
+$tokens = new RSEV\Session\JwtTokenProvider('jwt-signing-secret');
+$accessToken = $tokens->create('user-42', 900);
+```
+
 ## Runtime
 
 * Exit handling via `UnexpectedExitHandler`
@@ -113,6 +153,12 @@ namespace. The package version is `2.0.0`.
 | Platform | Status |
 | -------- | ------ |
 | PHP 8.5 | Active |
+
+## Documentation
+
+* [Platform Wiki](../Doku/README.txt)
+* [API-Referenz](../Doku/API-Referenz.txt)
+* [Repository Changelog](../../../CHANGELOG.md)
 
 
 

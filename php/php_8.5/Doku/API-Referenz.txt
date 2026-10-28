@@ -1,0 +1,101 @@
+====== PHP API-Referenz ======
+
+===== Core, Config, Container und Utils =====
+
+^ Namespace/Klasse ^ Öffentliche Funktionen ^
+| `RSEV\Core\Application` | `container()`, `processController()`, `apiHost()`, `run()` |
+| `RSEV\Config\Config` | `set()`, `get()` |
+| `RSEV\Config\ConfigLoader` | `load()`, `get()`, `all()` |
+| `RSEV\Container\Container` | `bind()`, `singleton()`, `get()` |
+| `RSEV\Collection\ArrayList` | `add()`, `get()`, `remove()`, `map()`, `filter()`, `toArray()`, `getIterator()`, `count()` |
+| `RSEV\Collection\HashMap` | `put()`, `get()`, `containsKey()`, `remove()`, `keys()`, `values()`, `getIterator()`, `count()` |
+| `RSEV\Utils\Arr` | Array-Hilfsoperationen aus `Arr.php` |
+| `RSEV\Utils\Str` | String-Hilfsoperationen aus `Str.php` |
+| `RSEV\Utils\MathUtil` | Mathe-Hilfsoperationen aus `MathUtil.php` |
+| `RSEV\Utils\Optional` | Optional-Wertoperationen aus `Optional.php` |
+| `RSEV\Stream\Stream` | Stream-Erzeugung und -Iteration aus `Stream.php` |
+
+===== Logging und Kommunikation =====
+
+^ Klasse ^ Öffentliche Funktionen ^
+| `Logger` | `info()`, `error()`, `log()` |
+| `AuditLogger` | `audit()` |
+| `DatabaseLogger` | `log()` |
+| `DBController` | `query()`, `execute()` |
+| `SystemMail` | `send()` |
+| SMTP-Clients | `send()`/Client-Operationen gemäß `ISmtpClient` |
+
+===== Database und Connection =====
+
+^ Klasse/Interface ^ Öffentliche Funktionen ^
+| `IDatabaseAdapter` | `provider()`, `createConnection()` |
+| `MySqlAdapter`, `SqlServerAdapter`, `PostgreSqlAdapter`, `SqliteAdapter` | `provider()`, `createConnection()` |
+| `ConnectionConfiguration` | Konstruktor, `dsn()` |
+| `ConnectionFactory` | Konstruktor, `create()` |
+| `ConnectionPool` | Konstruktor, `rent()`, `giveBack()`, `clear()` |
+| `IConnectionManager` | `open()`, `giveBack()` |
+| `ConnectionManager` | `open()`, `giveBack()`, `clear()` |
+
+===== Crypto und Session =====
+
+^ Klasse/Interface ^ Öffentliche Funktionen ^
+| `ICryptoProvider` | `algorithm()`, `compute()`, `verify()` |
+| `HamacProvider` | Konstruktor, `algorithm()`, `compute()`, `verify()` |
+| `Sha256Provider` | `algorithm()`, `compute()`, `verify()` |
+| `KeyManager` | `generate()` |
+| `AccessToken`, `RefreshToken` | Konstruktor, `isExpired()` |
+| `SessionContext` | Konstruktor, Token-/Subject-Felder |
+| `IAccessTokenProvider` | `create()`, `validate()` |
+| `JwtTokenProvider` | `create()`, `validate()` |
+| `ISessionManager` | `create()`, `isValid()` |
+| `SessionManager` | `create()`, `isValid()` |
+
+===== API und HTTP =====
+
+^ Klasse/Interface ^ Öffentliche Funktionen ^
+| `IApiClient` | `send()` |
+| `ApiRequest` | Konstruktor, Request-Felder |
+| `ApiResponse` | Konstruktor, `isSuccess()` |
+| `RetryPolicy` | Konstruktor, Policy-Felder |
+| `RateLimitPolicy` | Konstruktor, `tryAcquire()` |
+| `HttpApiClient` | Konstruktor, `send()` |
+| `IRuntimeEndpoint` | `route()`, `handle()` |
+| `BaseRuntimeEndpoint` | `route()`, `handle()`, `onHandle()` |
+| `RuntimeEndpointController` | Registrierung und Routenauflösung |
+| `RuntimeApiHost` | Registrierung, Start und Host-Lifecycle |
+| `RuntimeRequestBuilder` | `withRoute()`, `withPayload()`, `withHeader()`, `bindSession()`, `build()`, `buildBytes()` |
+| `RuntimeApiClient` | `setSession()`, `call()`, `send()` |
+| `RuntimeRequest`, `RuntimeResponse`, `RuntimeSession` | Datenmodelle, `isError()`, `getBodyAsText()`, `isExpired()`, `renew()` |
+| `EndpointRequest`, `EndpointResponse` | `payload()`, `fromText()`, `fromJson()`, `toHttp()` |
+
+===== Events, Controller und Commands =====
+
+^ Klasse/Interface ^ Öffentliche Funktionen ^
+| `Event` | Event-Datenmodell |
+| `EventRegistry` | `subscribe()`, `subscribeHandler()`, `subscribeListener()`, `unsubscribe()`, `handlers()`, `listeners()`, `publish()`, `publishAsync()` |
+| `EventBus` | `registerEventRegistry()`, `getRegistry()`, `hasRegistry()`, `getAllEventNames()`, `publish()` |
+| `EventDispatcher` | `listen()`, `dispatch()`, `forget()` |
+| Event-Interfaces | `handle()` bzw. `listen()` |
+| `ControllerInterface`, `BaseController` | `handle()`, `process()` |
+| Command-Klassen | Registrierung, Dispatch und `execute()` gemäß `ICommand` |
+| `Router` | Route registrieren und dispatchen |
+
+===== Runtime, Prozesse, Plugins und Laden =====
+
+^ Klasse/Interface ^ Öffentliche Funktionen ^
+| `IRuntimeSubprocess` | `processId()`, `name()`, `executable()`, `arguments()`, `state()`, `exitCode()`, `properties()`, `start()`, `stop()`, `restart()`, `checkHealth()` |
+| `RuntimeSubprocessBase` | Gemeinsamer Prozess-Lifecycle |
+| `ShellProcess`, `ExecutableProcess`, `PythonProcess`, `DotNetProcess`, `NodeProcess` | Prozesskonstruktoren und Lifecycle-Funktionen |
+| `RuntimeProcessController` | Registrierung, Start, Stop, Restart, Health und Auflistung |
+| `ProcessManager` | Vereinfachtes Starten von Kommandos |
+| `PluginInterface` | `boot()` |
+| `PluginLoader` | `load()`, `loadGenerator()` |
+| `PluginRegistry` | `register()`, `all()`, `generate()` |
+| `IGeneratorPlugin` | `name()`, `version()`, `generate()` |
+| `Request`, `Response` | `method()`, `uri()`, `input()`, `status()`, `json()`, `text()` |
+
+===== Quellzuordnung =====
+
+Die Referenz entspricht den Dateien unter `../RSEV/`. Bei einer Änderung der
+öffentlichen Signaturen muss dieses Wiki zusammen mit der Quelländerung
+aktualisiert werden.
