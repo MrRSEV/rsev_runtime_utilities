@@ -270,12 +270,12 @@ Die Standardimplementierung von `ExecuteAsync` erledigt nichts.
 | `UseTls` | `bool`, `true` | TLS aktivieren |
 | `MailingMethod` | `string`, `SMTP` | `SMTP` oder lokaler `SendMail`-Pfad |
 
-## Namespace `RSEV.Utilities.Communication.RSEV.Utilities.Communication`
+## Namespace `RSEV.Utilities.Communication`
 
 ### `SystemMail`
 
 Der tatsächlich kompilierte Typ liegt aktuell in
-`RSEV.Utilities.Communication.RSEV.Utilities.Communication`.
+`RSEV.Utilities.Communication`.
 
 ```csharp
 SystemMail()
