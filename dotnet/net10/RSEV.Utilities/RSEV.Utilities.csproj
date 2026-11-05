@@ -7,7 +7,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>RSEV.Utilities</PackageId>
-    <Version>2.0.0</Version>
+    <Version>3.0.0</Version>
     <Authors>Richard</Authors>
     <Company>RSEV</Company>
     <Description>Universal, extensible .NET utility framework.</Description>

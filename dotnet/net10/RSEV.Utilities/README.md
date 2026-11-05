@@ -123,6 +123,10 @@ manifest modules; it targets the built-in .NET APIs.
 
 ## Documentation
 
-* [Platform Wiki](Doku/README.txt)
-* [API-Referenz](Doku/API-Referenz.txt)
+* [Entwicklerdokumentation](Doku/README.md)
+* [Architektur](Doku/Architektur.md)
+* [Praxisbeispiele](Doku/Beispiele.md)
+* [API-Referenz](Doku/API-Referenz.md)
+* [Betrieb und Sicherheit](Doku/Betrieb-und-Sicherheit.md)
+* [Ältere DokuWiki-Kurzfassung](Doku/README.txt)
 * [Repository Changelog](../../../CHANGELOG.md)
